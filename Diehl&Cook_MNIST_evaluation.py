@@ -23,7 +23,8 @@ def get_labeled_data(picklename, bTrain = True):
        it as list of tuples.
     """
     if os.path.isfile('%s.pickle' % picklename):
-        data = pickle.load(open('%s.pickle' % picklename))
+        with open('%s.pickle' % picklename, 'rb') as f:
+            data = pickle.load(f)
     else:
         # Open the images with gzip in read binary mode
         if bTrain:
@@ -51,7 +52,8 @@ def get_labeled_data(picklename, bTrain = True):
             x[i] = [[unpack('>B', images.read(1))[0] for unused_col in range(cols)]  for unused_row in range(rows) ]
             y[i] = unpack('>B', labels.read(1))[0]
         data = {'x': x, 'y': y, 'rows': rows, 'cols': cols}
-        pickle.dump(data, open("%s.pickle" % picklename, "wb"))
+        with open("%s.pickle" % picklename, "wb") as f:
+            pickle.dump(data, f)
     return data
 
 def get_recognized_number_ranking(assignments, spike_rates):
@@ -112,7 +114,7 @@ assignments = get_new_assignments(training_result_monitor[start_time_training:en
                                   training_input_numbers[start_time_training:end_time_training])
 print(assignments)
 counter = 0 
-num_tests = end_time_testing / 10000
+num_tests = int(end_time_testing / 10000)
 sum_accurracy = [0] * num_tests
 while (counter < num_tests):
     end_time = min(end_time_testing, 10000*(counter+1))
