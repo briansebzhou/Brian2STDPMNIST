@@ -4,6 +4,10 @@ Created on 15.12.2014
 @author: Peter U. Diehl
 '''
 
+import os
+os.environ['QT_QPA_PLATFORM'] = 'xcb'
+
+
 
 import numpy as np
 import matplotlib.cm as cmap
@@ -13,8 +17,11 @@ import scipy
 import pickle
 from struct import unpack
 from brian2 import *
+# import brian2cuda
+# set_device('cuda_standalone')
 import brian2 as b2
 from brian2tools import *
+import matplotlib.pyplot as plt
 
 # specify the location of the MNIST data
 MNIST_data_path = './MNIST_data/'
@@ -87,7 +94,7 @@ def save_connections(ending = ''):
     print('save connections')
     for connName in save_conns:
         conn = connections[connName]
-        connListSparse = zip(conn.i, conn.j, conn.w)
+        connListSparse = list(zip(conn.i, conn.j, conn.w)) # Convert zip object to list before saving
         np.save(data_path + 'weights/' + connName + ending, connListSparse)
 
 def save_theta(ending = ''):
@@ -132,7 +139,8 @@ def plot_2d_input_weights():
     name = 'XeAe'
     weights = get_2d_input_weights()
     fig = b2.figure(fig_num, figsize = (18, 18))
-    im2 = b2.imshow(weights, interpolation = "nearest", vmin = 0, vmax = wmax_ee, cmap = cmap.get_cmap('hot_r'))
+    im2 = b2.imshow(weights, interpolation = "nearest", vmin = 0, vmax = wmax_ee, 
+                    cmap = plt.colormaps['hot_r'])
     b2.colorbar(im2)
     b2.title('weights of connection' + name)
     fig.canvas.draw()
@@ -484,7 +492,7 @@ while j < (int(num_examples)):
         if j % update_interval == 0 and j > 0:
             if do_plot_performance:
                 unused, performance = update_performance_plot(performance_monitor, performance, j, fig_performance)
-                print('Classification performance', performance[:(j/float(update_interval))+1])
+                print('Classification performance', performance[:int(j/update_interval)+1])
         for i,name in enumerate(input_population_names):
             input_groups[name+'e'].rates = 0 * Hz
         net.run(resting_time)
