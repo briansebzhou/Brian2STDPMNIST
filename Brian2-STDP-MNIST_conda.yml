@@ -193,4 +193,31 @@ dependencies:
   - xorg-libxxf86vm=1.1.6=hb9d3cd8_0
   - zlib-ng=2.2.3=h7955e40_0
   - zstd=1.5.6=ha6fb4c9_0
+  - pip:
+      - asttokens==3.0.0
+      - brian2cuda==1.0a7
+      - comm==0.2.2
+      - debugpy==1.8.12
+      - decorator==5.1.1
+      - exceptiongroup==1.2.2
+      - executing==2.1.0
+      - ipykernel==6.29.5
+      - ipython==8.31.0
+      - jedi==0.19.2
+      - jupyter-client==8.6.3
+      - jupyter-core==5.7.2
+      - matplotlib-inline==0.1.7
+      - nest-asyncio==1.6.0
+      - parso==0.8.4
+      - pexpect==4.9.0
+      - platformdirs==4.3.6
+      - prompt-toolkit==3.0.48
+      - psutil==6.1.1
+      - ptyprocess==0.7.0
+      - pure-eval==0.2.3
+      - pygments==2.19.1
+      - pyzmq==26.2.0
+      - stack-data==0.6.3
+      - traitlets==5.14.3
+      - wcwidth==0.2.13
 prefix: /home/brian_zhou/Github/Brian2STDPMNIST/Brian2-STDP-MNIST_conda

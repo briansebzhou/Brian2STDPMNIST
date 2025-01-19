@@ -2,7 +2,7 @@
 
 This small project is to translate Brian 1 code from Paper "Unsupervised learning of digit recognition using spike-timing-dependent plasticity" written by PU Diehl to Brian 2 version.
 
-The repository is further updated to be compatible with Python 3.10.16. Future integrations with [Brian2CUDA](https://brian2cuda.readthedocs.io/en/latest/introduction/index.html) is considered.
+The repository is further updated to be compatible with Python 3.10.16. Integrations with [Brian2CUDA](https://brian2cuda.readthedocs.io/en/latest/introduction/index.html) is under progress.
 
 ## Prerequisite
 
