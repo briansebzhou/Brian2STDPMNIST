@@ -27,7 +27,8 @@ def get_labeled_data(picklename, bTrain = True):
        it as list of tuples.
     """
     if os.path.isfile('%s.pickle' % picklename):
-        data = pickle.load(open('%s.pickle' % picklename))
+        with open('%s.pickle' % picklename, 'rb') as f:
+            data = pickle.load(f)
     else:
         # Open the images with gzip in read binary mode
         if bTrain:
@@ -57,7 +58,8 @@ def get_labeled_data(picklename, bTrain = True):
             y[i] = unpack('>B', labels.read(1))[0]
 
         data = {'x': x, 'y': y, 'rows': rows, 'cols': cols}
-        pickle.dump(data, open("%s.pickle" % picklename, "wb"))
+        with open("%s.pickle" % picklename, "wb") as f:
+            pickle.dump(data, f)
     return data
 
 def get_matrix_from_file(fileName):
@@ -211,7 +213,8 @@ print('time needed to load test set:', end - start)
 #------------------------------------------------------------------------------
 # set parameters and equations
 #------------------------------------------------------------------------------
-test_mode = True
+# test_mode = True
+test_mode = False
 
 np.random.seed(0)
 data_path = './'
