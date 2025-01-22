@@ -221,8 +221,8 @@ print('time needed to load test set:', end - start)
 #------------------------------------------------------------------------------
 # set parameters and equations
 #------------------------------------------------------------------------------
-# test_mode = True
-test_mode = False
+test_mode = True
+# test_mode = False
 
 np.random.seed(0)
 data_path = './'
@@ -248,9 +248,10 @@ else:
 
 ending = ''
 n_input = 784
-n_e = 400
+# n_e = 400
+n_e = 100
 n_i = n_e
-single_example_time =   0.35 * b2.second #
+single_example_time =   0.35 * b2.second
 resting_time = 0.15 * b2.second
 runtime = num_examples * (single_example_time + resting_time)
 if num_examples <= 10000:
@@ -339,7 +340,7 @@ eqs_stdp_ee = '''
 eqs_stdp_pre_ee = 'pre = 1.; w = clip(w + nu_ee_pre * post1, 0, wmax_ee)'
 eqs_stdp_post_ee = 'post2before = post2; w = clip(w + nu_ee_post * pre * post2before, 0, wmax_ee); post1 = 1.; post2 = 1.'
 
-b2.ion()
+# b2.ion() # interactive mode, disable to save memory
 fig_num = 1
 neuron_groups = {}
 input_groups = {}
@@ -444,8 +445,9 @@ assignments = np.zeros(n_e)
 input_numbers = [0] * num_examples
 outputNumbers = np.zeros((num_examples, 10))
 if not test_mode:
-    input_weight_monitor, fig_weights = plot_2d_input_weights()
-    fig_num += 1
+    # input_weight_monitor, fig_weights = plot_2d_input_weights()
+    # fig_num += 1
+    pass
 if do_plot_performance:
     performance_monitor, performance, fig_num, fig_performance = plot_performance(fig_num)
 for i,name in enumerate(input_population_names):
@@ -468,7 +470,8 @@ while j < (int(num_examples)):
     if j % update_interval == 0 and j > 0:
         assignments = get_new_assignments(result_monitor[:], input_numbers[j-update_interval : j])
     if j % weight_update_interval == 0 and not test_mode:
-        update_2d_input_weights(input_weight_monitor, fig_weights)
+        # update_2d_input_weights(input_weight_monitor, fig_weights)
+        pass
     if j % save_connections_interval == 0 and j > 0 and not test_mode:
         save_connections(str(j))
         save_theta(str(j))

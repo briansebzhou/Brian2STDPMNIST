@@ -48,7 +48,8 @@ black   = '#000000'    #
 my_cmap = matplotlib.colors.LinearSegmentedColormap.from_list('own2',[bright_grey,black])
 
 n_input = 784
-n_e = 400
+# n_e = 400
+n_e = 100
 
 for name in readoutnames:
     readout = np.load(name + '.npy')

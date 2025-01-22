@@ -90,7 +90,8 @@ end_time_training = int(training_ending)
 start_time_testing = 0
 end_time_testing = int(testing_ending)
 
-n_e = 400
+# n_e = 400
+n_e = 100
 n_input = 784
 ending = ''
 
